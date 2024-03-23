@@ -1,3 +1,6 @@
+import Link from "next/link"
+import Modal from "../../Modal/ModalEdit/ModalEdit"
+
 export const PostCard = () => {
     return(
         <>
@@ -6,7 +9,7 @@ export const PostCard = () => {
                 <div className="flex flex-row gap-3 justify-center items-center">
                     <span className="text-[#bcc9d6]">Status</span>
                     <div className="flex flex-row gap-3">
-                        <button className=" hover:bg-[#768896] p-2">Edit</button>
+                        <Link href="?modaledit=true"><button className=" hover:bg-[#768896] p-2">Editar</button></Link>
                         <button className="hover:bg-[#768896] p-2">Delet</button>
                     </div>
                 </div>

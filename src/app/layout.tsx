@@ -3,6 +3,7 @@ import "~/styles/index.css";
 import { Inter } from "next/font/google";
 
 import { TRPCReactProvider } from "~/trpc/react";
+import ModalEdit from "./_components/Modal/ModalEdit/ModalEdit";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -24,6 +25,7 @@ export default function RootLayout({
     <html lang="en">
       <body className={`font-sans ${inter.variable}`}>
         <TRPCReactProvider>{children}</TRPCReactProvider>
+        <ModalEdit/>
       </body>
     </html>
   );
