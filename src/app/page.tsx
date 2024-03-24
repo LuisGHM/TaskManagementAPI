@@ -1,10 +1,12 @@
-import { LoginForm } from "./_components/form/LoginForm";
+import { SessionProvider } from "next-auth/react";
+import DashBoard from "./dashboard/page";
 
-export default async function Home() {
-
+export default function Home() {
   return (
-    <main className="h-[100vh]">
-      <LoginForm/>
-    </main>
+    <>
+      <main className="h-[100vh]">
+        <DashBoard/>
+      </main>
+    </>
   );
 }
