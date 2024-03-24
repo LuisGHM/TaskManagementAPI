@@ -32,4 +32,18 @@ export const taskRouter = createTRPCRouter({
         },
       });
     }),
+
+    update: protectedProcedure
+    .input(z.object({ title: z.string(), status: z.string(), id: z.string() }))
+    .mutation(({ ctx, input }) => {
+        return ctx.db.task.update({
+            where: {
+                id: input.id
+            },
+            data: {
+                title: input.title,
+                status: input.status,
+            },
+        });
+    }),
 });

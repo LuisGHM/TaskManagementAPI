@@ -5,13 +5,13 @@ import { api } from "~/trpc/react";
 
 export const ModalCreateForm = () => {
 
-    const createTopic = api.tasks.create.useMutation({});
+    const createTask = api.tasks.create.useMutation({});
 
     const handleSubmit = async (event: any) => {
         const taskName = event.target.taskName.value;
         const selectedPhase = event.target.phase.value;
         
-        createTopic.mutate({
+        createTask.mutate({
             title: taskName,
             status: selectedPhase
           });

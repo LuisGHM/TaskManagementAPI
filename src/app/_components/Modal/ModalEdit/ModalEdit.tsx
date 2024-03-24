@@ -3,11 +3,19 @@ import {useSearchParams, usePathname} from "next/navigation";
 import Link from "next/link";
 import { EditTaskForm } from "../../form/EditTaskForm";
 
-function ModalEdit() {
+export interface PropsUpdate {
+    id: string,
+    title: string,
+    status: string
+}
+
+
+
+function ModalEdit({id, title, status}: PropsUpdate) {
     const searchParams = useSearchParams();
     const modal = searchParams.get("modaledit");
     const pathname = usePathname();
-
+    
     return (
         <>
             {modal &&
@@ -20,7 +28,10 @@ function ModalEdit() {
                             </Link>
                         </div>
                         <div>
-                            <EditTaskForm/>
+                            <EditTaskForm id={id} title={title} status={status}/>
+                        </div>
+                        <div>
+                            
                         </div>
                     </div>
                 </dialog>
@@ -28,5 +39,6 @@ function ModalEdit() {
         </>
     );
 }
+
 
 export default ModalEdit;

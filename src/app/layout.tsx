@@ -8,11 +8,14 @@ import ModalEdit from "./_components/Modal/ModalEdit/ModalEdit";
 import ModalCreate from "./_components/Modal/ModalCreate";
 import { Session } from "next-auth";
 import { SessionProvider } from "next-auth/react";
+import { useState } from "react";
+import Home from "./page";
 
 const inter = Inter({
   subsets: ["latin"],
   variable: "--font-sans",
 });
+
 
 export default function RootLayout({
   children,
@@ -21,13 +24,17 @@ export default function RootLayout({
   children: React.ReactNode;
   session: Session
 }) {
+  
+  const [id, setId] = useState('');
+  const [title, setTitle] = useState('');
+  const [status, setStatus] = useState('');
   return (
     <html lang="en">
       <body className={`font-sans ${inter.variable}`}>
         <SessionProvider session={session}>
           <TRPCReactProvider>
-            {children}
-            <ModalEdit/>
+            <Home setId={setId} setTitle={setTitle} setStatus={setStatus}/>
+            <ModalEdit id={id} title={title} status={status}/>
             <ModalCreate/>
           </TRPCReactProvider>
         </SessionProvider>

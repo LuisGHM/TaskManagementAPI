@@ -3,8 +3,9 @@ import Link from "next/link"
 import { useSession } from "next-auth/react"
 import { api } from "~/trpc/react"
 import PostCard from "./PostCard/PostCard";
+import { PropsSetUpdate } from "~/app/page";
 
-export const TaskSection = () => {
+export const TaskSection = ({setId, setTitle, setStatus}: PropsSetUpdate) => {
     const {data: sessionData } = useSession();
 
     const { data: tasks, refetch: refetchTasks} = api.tasks.getAll.useQuery(
@@ -24,7 +25,7 @@ export const TaskSection = () => {
                 <div>
                     <ul className="bg-[#c4d8e7] p-2 flex flex-col gap-4">
                         {tasks?.map((task) => (
-                             <PostCard key={task.id} id={task.id} title={task.title} status={task.status} />
+                             <PostCard key={task.id} id={task.id} title={task.title} status={task.status} setId={setId} setTitle={setTitle} setStatus={setStatus}/>
                         ))}
                     </ul>
                 </div>
