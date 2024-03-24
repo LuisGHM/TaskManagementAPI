@@ -1,21 +1,38 @@
-import Link from "next/link"
-import Modal from "../../Modal/ModalEdit/ModalEdit"
+import Link from "next/link";
+import { api } from "~/trpc/react";
 
-export const PostCard = () => {
-    
-    
-    return(
+interface PostCardProps {
+    id: string;
+    title: string;
+    status: string;
+}
+
+const PostCard = ({ id, title, status }: PostCardProps) => {
+
+    const deleteTasks = api.tasks.delete.useMutation({
+        onSuccess: () => window.location.reload()
+    })
+
+    const handleSubmit: any = async (id:string) => {        
+        deleteTasks.mutate({
+            id:id
+        });
+    }
+
+    return (
         <>
-            <li className="bg-[#869aa8] flex flex-row justify-between p-2 text-white items-center">
-                <h1 className="font-normal">Titulo da task</h1>
+            <li id={id} className="bg-[#869aa8] flex flex-row justify-between p-2 text-white items-center">
+                <h1 className="font-normal">{title}</h1>
                 <div className="flex flex-row gap-3 justify-center items-center">
-                    <span className="text-[#bcc9d6]">Status</span>
+                    <span className="text-[#bcc9d6]">Status: {status}</span>
                     <div className="flex flex-row gap-3">
-                        <Link href="?modaledit=true"><button className=" hover:bg-[#768896] p-2">Editar</button></Link>
-                        <button className="hover:bg-[#768896] p-2">Delete</button>
+                        <Link href="?modaledit=true"><button className="hover:bg-[#768896] p-2">Editar</button></Link>
+                        <button className="hover:bg-[#768896] p-2" onClick={() => handleSubmit(id)}>Delete</button>
                     </div>
                 </div>
             </li>
         </>
-    )
-}
+    );
+};
+
+export default PostCard;

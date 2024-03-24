@@ -1,8 +1,8 @@
 "use client"
 import Link from "next/link"
-import { PostCard } from "./PostCard/PostCard"
 import { useSession } from "next-auth/react"
 import { api } from "~/trpc/react"
+import PostCard from "./PostCard/PostCard";
 
 export const TaskSection = () => {
     const {data: sessionData } = useSession();
@@ -23,13 +23,12 @@ export const TaskSection = () => {
                 </div>
                 <div>
                     <ul className="bg-[#c4d8e7] p-2 flex flex-col gap-4">
-                        <PostCard/>
-                        <div>{JSON.stringify(tasks)}</div>
+                        {tasks?.map((task) => (
+                             <PostCard key={task.id} id={task.id} title={task.title} status={task.status} />
+                        ))}
                     </ul>
                 </div>
             </div>
-
         </main>
     )
 }
-
