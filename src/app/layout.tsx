@@ -25,9 +25,11 @@ export default function RootLayout({
     <html lang="en">
       <body className={`font-sans ${inter.variable}`}>
         <SessionProvider session={session}>
-          <TRPCReactProvider>{children}</TRPCReactProvider>
-          <ModalEdit/>
-          <ModalCreate/>
+          <TRPCReactProvider>
+            {children}
+            <ModalEdit/>
+            <ModalCreate/>
+          </TRPCReactProvider>
         </SessionProvider>
       </body>
     </html>

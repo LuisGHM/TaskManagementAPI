@@ -3,6 +3,7 @@ import {useSearchParams, usePathname} from "next/navigation";
 import Link from "next/link";
 import { ModalCreateForm } from "../../form/ModalCreateForm";
 
+
 function ModalCreate() {
     const searchParams = useSearchParams();
     const modal = searchParams.get("modalcreate");
