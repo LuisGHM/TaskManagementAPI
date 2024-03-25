@@ -1,9 +1,9 @@
 import DashBoard from "./dashboard/page";
 
 export interface PropsSetUpdate {
-  setId: any
-  setTitle: any
-  setStatus: any
+  setId: React.Dispatch<React.SetStateAction<string>>;
+  setTitle: React.Dispatch<React.SetStateAction<string>>;
+  setStatus: React.Dispatch<React.SetStateAction<string>>;
 }
 
 export default function Home({setId, setTitle, setStatus}: PropsSetUpdate) {
