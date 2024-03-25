@@ -27,7 +27,7 @@ const PostCard = ({ id, title, status, setId, setTitle, setStatus }: PostCardPro
             <li id={id} className="bg-[#869aa8] flex flex-row justify-between p-2 text-white items-center">
                 <h1 className="font-normal">{title}</h1>
                 <div className="flex flex-row gap-3 justify-center items-center">
-                    <span className="text-[#bcc9d6]">Status: {status}</span>
+                    <span className="text-[#bcc9d6]">{status}</span>
                     <div className="flex flex-row gap-3">
                         <Link href="?modaledit=true">
                             <button className="hover:bg-[#768896] p-2" onClick={() => { setId(id); setTitle(title); setStatus(status); }}>Editar</button>
