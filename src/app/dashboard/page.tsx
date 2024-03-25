@@ -2,7 +2,7 @@ import { DashBoardHeader } from "../_components/Header/HeaderDashBoard";
 import { TaskSection } from "../_components/PostList/TaskSection";
 import { PropsSetUpdate } from "../page";
 
-export default function DashBoard ({setId, setTitle, setStatus}: PropsSetUpdate) {
+function DashBoard ({setId, setTitle, setStatus}: PropsSetUpdate) {
     return(
         <>
             <DashBoardHeader/>
@@ -10,3 +10,5 @@ export default function DashBoard ({setId, setTitle, setStatus}: PropsSetUpdate)
         </>
     )
 }
+
+export default DashBoard;

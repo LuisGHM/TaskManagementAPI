@@ -6,7 +6,7 @@ export interface PropsSetUpdate {
   setStatus: React.Dispatch<React.SetStateAction<string>>;
 }
 
-export default function Home({setId, setTitle, setStatus}: PropsSetUpdate) {
+function Home({setId, setTitle, setStatus}: PropsSetUpdate) {
   return (
     <>
       <main className="h-[100vh]">
@@ -15,3 +15,6 @@ export default function Home({setId, setTitle, setStatus}: PropsSetUpdate) {
     </>
   );
 }
+
+
+export default Home;
