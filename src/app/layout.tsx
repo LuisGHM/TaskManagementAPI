@@ -7,6 +7,7 @@ import ModalCreate from "./_components/Modal/ModalCreate";
 import { Session } from "next-auth";
 import { SessionProvider } from "next-auth/react";
 import { UpdateProvider } from "~/providers/UpdateProvider";
+import { Suspense } from "react";
 
 
 
@@ -22,11 +23,13 @@ export default function RootLayout({
       <body>
         <SessionProvider session={session ?? undefined}> {/* Corrigindo a passagem de session */}
           <TRPCReactProvider>
-            <UpdateProvider>
-              {children}
-              <ModalEdit/>
-            </UpdateProvider>
-            <ModalCreate/>
+            <Suspense>
+              <UpdateProvider>
+                {children}
+                <ModalEdit/>
+              </UpdateProvider>
+              <ModalCreate/>
+            </Suspense>
           </TRPCReactProvider>
         </SessionProvider>
       </body>
