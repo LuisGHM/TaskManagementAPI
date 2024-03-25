@@ -13,7 +13,7 @@ const PostCard = ({ id, title, status}: PostCardProps) => {
 
     const deleteTasks = api.tasks.delete.useMutation({
         onSuccess: () => {
-            refetchTasks();
+            window.location.href = "/";
         }, 
     });
 
