@@ -2,19 +2,16 @@
 import {useSearchParams, usePathname} from "next/navigation";
 import Link from "next/link";
 import { EditTaskForm } from "../../form/EditTaskForm";
-
-export interface PropsUpdate {
-    id: string,
-    title: string,
-    status: string
-}
+import { useContext } from "react";
+import { useAppContext } from "~/providers/UpdateProvider";
 
 
-
-function ModalEdit({id, title, status}: PropsUpdate) {
+function ModalEdit() {
     const searchParams = useSearchParams();
     const modal = searchParams.get("modaledit");
     const pathname = usePathname();
+
+    const { id, title, status } = useAppContext(); 
     
     return (
         <>

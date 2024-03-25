@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
-import { PropsUpdate } from "../../Modal/ModalEdit/ModalEdit";
 import { api } from '~/trpc/react';
 
-export const EditTaskForm = ({ id, title: initialTitle, status: initialStatus }: PropsUpdate) => {
+export const EditTaskForm = ({ id, title: initialTitle, status: initialStatus }: any) => {
     const [title, setTitle] = useState(initialTitle);
     const [status, setStatus] = useState(initialStatus);
 

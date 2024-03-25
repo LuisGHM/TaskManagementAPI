@@ -3,12 +3,11 @@ import Link from "next/link"
 import { useSession } from "next-auth/react"
 import { api } from "~/trpc/react"
 import PostCard from "./PostCard/PostCard";
-import { PropsSetUpdate } from "~/app/page";
 import { useState } from "react";
 
-export const TaskSection = ({setId, setTitle, setStatus}: PropsSetUpdate) => {
+export const TaskSection = () => {
     const {data: sessionData } = useSession();
-    const [filter, setFilter] = useState('all'); // Estado inicial para filtrar todas as tarefas
+    const [filter, setFilter] = useState('all');
 
     const { data: tasks, refetch: refetchTasks} = api.tasks.getAll.useQuery(
         undefined,
@@ -39,7 +38,7 @@ export const TaskSection = ({setId, setTitle, setStatus}: PropsSetUpdate) => {
                 <div>
                     <ul className="bg-[#c4d8e7] p-2 flex flex-col gap-4">
                         {filteredTasks().map((task) => (
-                             <PostCard key={task.id} id={task.id} title={task.title} status={task.status} setId={setId} setTitle={setTitle} setStatus={setStatus}/>
+                             <PostCard key={task.id} id={task.id} title={task.title} status={task.status}/>
                         ))}
                     </ul>
                 </div>

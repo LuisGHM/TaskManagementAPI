@@ -1,25 +1,22 @@
 import Link from "next/link";
-import { PropsSetUpdate } from "~/app/page";
+import { useAppContext } from "~/providers/UpdateProvider";
 import { api } from "~/trpc/react";
-
 
 interface PostCardProps {
     id: string;
     title: string;
     status: string; 
-    setId: any
-    setTitle: any
-    setStatus: any
 }
 
-const PostCard = ({ id, title, status, setId, setTitle, setStatus }: PostCardProps) => {
+const PostCard = ({ id, title, status}: PostCardProps) => {
+    const { setId, setTitle, setStatus } = useAppContext();
 
     const deleteTasks = api.tasks.delete.useMutation({
-        onSuccess: () => window.location.reload()
+        onSuccess: () => {}, 
     });
 
     const handleSubmit = async (id: string) => {
-        await deleteTasks.mutate({ id: id }); // Removido ponto e vírgula desnecessário
+        await deleteTasks.mutate({ id: id }); 
     };
 
     return (
@@ -30,7 +27,7 @@ const PostCard = ({ id, title, status, setId, setTitle, setStatus }: PostCardPro
                     <span className="text-[#bcc9d6]">{status}</span>
                     <div className="flex flex-row gap-3">
                         <Link href="?modaledit=true">
-                            <button className="hover:bg-[#768896] p-2" onClick={() => { setId(id); setTitle(title); setStatus(status); }}>Editar</button>
+                            <button className="hover:bg-[#768896] p-2" onClick={() => {setId(id); setTitle(title); setStatus(status); }}>Editar</button>
                         </Link>
                         <button className="hover:bg-[#768896] p-2" onClick={() => handleSubmit(id)}>Delete</button>
                     </div>

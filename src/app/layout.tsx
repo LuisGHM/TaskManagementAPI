@@ -1,20 +1,13 @@
-'use client'
+'use client'; // Corrigindo a diretiva 'use client' (certifique-se de que seja a correta para o seu caso)
 import "~/styles/index.css";
-
 import { Inter } from "next/font/google";
-
 import { TRPCReactProvider } from "~/trpc/react";
 import ModalEdit from "./_components/Modal/ModalEdit/ModalEdit";
 import ModalCreate from "./_components/Modal/ModalCreate";
 import { Session } from "next-auth";
 import { SessionProvider } from "next-auth/react";
-import { useState } from "react";
-import Home from "./page";
+import { UpdateProvider } from "~/providers/UpdateProvider";
 
-const inter = Inter({
-  subsets: ["latin"],
-  variable: "--font-sans",
-});
 
 
 export default function RootLayout({
@@ -22,19 +15,17 @@ export default function RootLayout({
   session
 }: {
   children: React.ReactNode;
-  session: Session
+  session: never; 
 }) {
-  
-  const [id, setId] = useState('');
-  const [title, setTitle] = useState('');
-  const [status, setStatus] = useState('');
   return (
     <html lang="en">
-      <body className={`font-sans ${inter.variable}`}>
-        <SessionProvider session={session}>
+      <body>
+        <SessionProvider session={session ?? undefined}> {/* Corrigindo a passagem de session */}
           <TRPCReactProvider>
-            <Home setId={setId} setTitle={setTitle} setStatus={setStatus}/>
-            <ModalEdit id={id} title={title} status={status}/>
+            <UpdateProvider>
+              {children}
+              <ModalEdit/>
+            </UpdateProvider>
             <ModalCreate/>
           </TRPCReactProvider>
         </SessionProvider>
