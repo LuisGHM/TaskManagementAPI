@@ -1,6 +1,4 @@
-import { SessionProvider } from "next-auth/react";
 import DashBoard from "./dashboard/page";
-import { any } from "zod";
 
 export interface PropsSetUpdate {
   setId: any

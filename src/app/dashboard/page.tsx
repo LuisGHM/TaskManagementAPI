@@ -1,8 +1,11 @@
 import { DashBoardHeader } from "../_components/Header/HeaderDashBoard";
 import { TaskSection } from "../_components/PostList/TaskSection";
-import Modal from "../_components/Modal/ModalEdit/ModalEdit";
-import { PropsSetUpdate } from "../page";
 
+export interface PropsSetUpdate {
+    setId: any
+    setTitle: any
+    setStatus: any
+}
 
 export default function DashBoard ({setId, setTitle, setStatus}: PropsSetUpdate) {
     return(
