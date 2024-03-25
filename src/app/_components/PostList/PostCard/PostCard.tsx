@@ -9,10 +9,12 @@ interface PostCardProps {
 }
 
 const PostCard = ({ id, title, status}: PostCardProps) => {
-    const { setId, setTitle, setStatus } = useAppContext();
+    const { setId, setTitle, setStatus, refetchTasks } = useAppContext();
 
     const deleteTasks = api.tasks.delete.useMutation({
-        onSuccess: () => {}, 
+        onSuccess: () => {
+            refetchTasks();
+        }, 
     });
 
     const handleSubmit = async (id: string) => {

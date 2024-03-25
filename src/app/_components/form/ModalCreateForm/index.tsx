@@ -1,13 +1,21 @@
-import { useRouter } from 'next/router';
+import { useAppContext } from '~/providers/UpdateProvider';
 import { api } from "~/trpc/react";
 
 
 
 export const ModalCreateForm = () => {
 
-    const createTask = api.tasks.create.useMutation({});
+    const { refetchTasks } = useAppContext();
+
+    const createTask = api.tasks.create.useMutation({
+        onSuccess: () => {
+            refetchTasks();
+            window.location.href = "/";
+        }
+    });
 
     const handleSubmit = async (event: any) => {
+        event.preventDefault();
         const taskName = event.target.taskName.value;
         const selectedPhase = event.target.phase.value;
         
@@ -38,7 +46,7 @@ export const ModalCreateForm = () => {
                 <option value="Doing">Doing</option>
                 <option value="Done">Done</option>
             </select>
-            <button className="bg-[#29b6f6] text-white text-base font-medium rounded w-[100%] p-3 hover:bg-[#00aeff]" type='submit'>Submit</button>
+            <button className="bg-[#29b6f6] text-white text-base font-medium rounded w-[100%] p-3 hover:bg-[#00aeff]">Submit</button>
         </form>
     )
 }

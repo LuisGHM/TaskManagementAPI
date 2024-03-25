@@ -17,7 +17,7 @@ function ModalCreate() {
                         <div className="flex flex-row items-center justify-between">
                             <p>Register new task</p>
                             <Link href={pathname}>
-                                <button type="button" className="bg-red-500 text-white p-2">Close</button>
+                                <button className="bg-red-500 text-white p-2">Close</button>
                             </Link>
                         </div>
                         <div>

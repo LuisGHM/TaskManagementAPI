@@ -27,8 +27,8 @@ export default function RootLayout({
               <UpdateProvider>
                 {children}
                 <ModalEdit/>
+                <ModalCreate/>
               </UpdateProvider>
-              <ModalCreate/>
             </Suspense>
           </TRPCReactProvider>
         </SessionProvider>

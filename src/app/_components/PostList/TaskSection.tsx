@@ -3,23 +3,24 @@ import Link from "next/link"
 import { useSession } from "next-auth/react"
 import { api } from "~/trpc/react"
 import PostCard from "./PostCard/PostCard";
-import { useState } from "react";
+import { Key, useState } from "react";
+import { useAppContext } from "~/providers/UpdateProvider";
 
 export const TaskSection = () => {
-    const {data: sessionData } = useSession();
     const [filter, setFilter] = useState('all');
 
-    const { data: tasks, refetch: refetchTasks} = api.tasks.getAll.useQuery(
-        undefined,
-        {
-            enabled: sessionData?.user !== undefined
-        }
-    );
+    const { tasks } = useAppContext(); 
+
     
     const filteredTasks = () => {
         if (!tasks) return [];
         if (filter === 'all') return tasks;
-        return tasks.filter(task => task.status === filter);
+        return tasks.filter((task: { id: string;
+            createdAt: Date;
+            updatedAt: Date;
+            title: string;
+            status: string;
+            userId: string; }) => task.status === filter);
     }
 
     return(
@@ -37,7 +38,7 @@ export const TaskSection = () => {
                 </div>
                 <div>
                     <ul className="bg-[#c4d8e7] p-2 flex flex-col gap-4">
-                        {filteredTasks().map((task) => (
+                        {filteredTasks().map((task: { id: string ; title: string; status: string; }) => (
                              <PostCard key={task.id} id={task.id} title={task.title} status={task.status}/>
                         ))}
                     </ul>
